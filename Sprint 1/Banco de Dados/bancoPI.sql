@@ -4,57 +4,78 @@ CREATE DATABASE projetoPI;
 
 USE projetoPI;
 
--- Criando tabela de Cadastro
+-- Criando tabela de Cadastro de Empresa
 
-CREATE TABLE cadastro (
+CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 	nome_Empresa VARCHAR(50) NOT NULL,
+    ddd VARCHAR(10) NOT NULL,
     telefone_Empresa VARCHAR(30) NOT NULL,
-	email_Cliente VARCHAR(50) NOT NULL,
-	site_Empresa VARCHAR (50) NOT NULL,
-	senha_Acesso VARCHAR (12) NOT NULL,
+	email_Empresa VARCHAR(50) NOT NULL,
+	site_Empresa VARCHAR (100) NOT NULL,
 	cnpj_Empresa CHAR (20) NOT NULL,
-	cpf_Contratante CHAR (15) NOT NULL,
-	cep_Contratante CHAR (10) NOT NULL,
-	pais VARCHAR(190) NOT NULL,
+	cep_Empresa CHAR (10) NOT NULL,
+	pais VARCHAR(100) NOT NULL,
     uf CHAR(2) NOT NULL,
-    cidade VARCHAR(190) NOT NULL,
-    logradouro VARCHAR(190) NOT NULL,
-    bairro VARCHAR(190) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    logradouro VARCHAR(100) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
     numero VARCHAR(30) NOT NULL,
     complemento VARCHAR(190),
     observacoes VARCHAR(300),
-	dt_Cadastro DATETIME DEFAULT CURRENT_TIMESTAMP 
+	dt_CadastroEmpresa DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
--- Inserindo dados na tabela de Cadastro
+-- Inserindo dados na tabela de Cadastro de Empresa
 
-TRUNCATE TABLE cadastro;
+INSERT INTO empresa (nome_Empresa, ddd, telefone_Empresa, email_Empresa, site_Empresa, cnpj_Empresa, cep_Empresa, pais, uf, cidade, logradouro, bairro, numero, complemento, observacoes) VALUES
+	('Vinícola Ouro Verde', '55', '11934567890', 'clienteempresa01@gmail.com', 'www.vinicolaouroverde.com.br', '32888619000170', '15990882', 'Brasil', 'RS', 'Bento Gonçalves', 'Rua das Uvas', 'Centro', '1200', 'Bloco A', 'Solicita relatórios mensais'),
+	('Adega São Pedro', '55', '11234564532', 'suporte@adegaspedro.com', 'www.adegasaopedro.com.br', '58234123000170', '38700230', 'Brasil', 'SP', 'São Roque', 'Avenida Vinhedo', 'Jardim Vinhedos', '455', 'Sala 2', 'Interessada em expansão do sistema');
 
-INSERT INTO cadastro (nome_Empresa, telefone_Empresa, email_Cliente, site_Empresa, senha_Acesso, cnpj_Empresa, cpf_Contratante, cep_Contratante, pais, uf, cidade, logradouro, bairro, numero, complemento, observacoes) VALUES
-	('Vinícola Ouro Verde', '+55 1193456-7890', 'clienteempresa01@gmail.com', 'www.vinicolaouroverde.com.br', '******@', '32.888.619/0001-70', '319.817.950-57', '15990-882', 'Brasil', 'RS', 'Bento Gonçalves', 'Rua das Uvas', 'Centro', '1200', 'Bloco A', 'Solicita relatórios mensais'),
-	('Adega São Pedro', '+55 1123456-4532', 'suporte@adegaspedro.com', 'www.adegasaopedro.com.br', '*******@', '58.234.123/0001-70', '452.134.564-53', '38700-230', 'Brasil', 'SP', 'São Roque', 'Avenida Vinhedo', 'Jardim Vinhedos', '455', 'Sala 2', 'Interessada em expansão do sistema');
+-- Selecionando e exibindo dados na tabela de Cadastro de Empresa
 
--- Selecionando e exibindo dados na tabela de Cadastro
-
-SELECT * FROM cadastro;
+SELECT * FROM empresa;
 
 SELECT idEmpresa,
 	nome_Empresa AS 'Nome da Empresa',
 	cnpj_Empresa AS 'CNPJ', 
-	telefone_Empresa AS 'Telefone empresarial',
-	email_Cliente AS 'E-MAIL da Empresa',
-	cpf_Contratante AS 'CPF do Contratante',
+	CONCAT('+', ddd, ' ', telefone_Empresa) AS 'Telefone empresarial',
+	email_Empresa AS 'E-mail da Empresa',
 	site_Empresa AS 'Site da Empresa',
-	senha_Acesso AS 'Senha de Acesso',
 	CONCAT(logradouro, ', ', numero, ', ', complemento, ', ', bairro, ', ', cidade, ', ', uf, ', ', pais) AS 'Endereço',
-	cep_Contratante AS 'CEP', 
+	cep_Empresa AS 'CEP', 
 	observacoes AS 'Informações extras',
-	dt_Cadastro AS 'Data e Hora do Cadastro'
-	FROM cadastro;
+	dt_CadastroEmpresa AS 'Data e Hora do Cadastro'
+	FROM empresa;
 
 
--- Criando tabela de Arduino
+-- Criando tabela de Usuário
+
+CREATE TABLE usuario(
+	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome_Cliente VARCHAR(100) NOT NULL,
+    sobrenome_Cliente VARCHAR(100) NOT NULL,
+    senha_Acesso VARCHAR(30) NOT NULL,
+    cpf_Cliente CHAR(12) NOT NULL,
+    email_Cliente VARCHAR(100),
+    dt_CadastroUsuario DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Inserindo dados na tabela de Cadastro do Usuário
+
+INSERT INTO usuario (nome_Cliente, sobrenome_Cliente, senha_Acesso, cpf_Cliente, email_Cliente) VALUES
+	('João', 'Silva', '********@', '45213456453', 'joaosilva330@email.com'),
+	('Maria', 'Souza', '******@', '31981795057', 'mariasouza1023@email.com');
+
+-- Selecionando e exibindo dados na tabela de Cadastro do Usuário
+
+SELECT CONCAT(nome_Cliente , ' ', sobrenome_Cliente) AS 'Nome do Cliente',
+		senha_Acesso AS 'Senha de Acesso',
+        cpf_Cliente AS 'CPF',
+        email_Cliente AS 'E-mail'
+        FROM usuario;
+
+-- Criando tabela de Arduino	
 
 CREATE TABLE dadosArduino(
 	idArduino INT PRIMARY KEY AUTO_INCREMENT,
