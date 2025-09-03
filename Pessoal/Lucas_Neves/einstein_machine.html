@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body style="color: darkslateblue;">
+   <h2><b style="color: blue;">Calculadora Financeira</b></h2> 
+   Quantidade de litros de vinho por barril:<input id="L_vinho"> <br>
+   Valor por litro:<input id="V_litro"> <br>
+A cada quantas horas é verificada fisicamente a temperatura e a umidade dos barris:<input id="F_verifi"> <br>
+   <button onclick="calcular()">Simulação</button> <br>
+   <div id="id_dodiv"></div>
+    
+</body>
+
+<script>
+function calcular() {
+var preju = Number(L_vinho.value) * Number(V_litro.value);
+var litro = Number(L_vinho.value);
+var freq = Number(F_verifi.value);
+id_dodiv.innerHTML = 
+'<b>O prejuízo estimado por barril em caso de falha no sistema de refrigeração e umidade é de <b> ' +
+preju.toFixed(2) + 'R$  por barril nas ' + freq + 'h' + ' <b>sem monitoramento.<b><br><b style="color:blue;"> Com o monitoramento 24h com os sensores de temperatura e umidade, essa verificação se torna desnecessária, sem colocar em risco seu lote de <b>' + litro + '<b style = "color= blue;"> litros com valor de <b>' + preju.toFixed(2) + 'R$';
+}
+
+
+
+</script>
+</html>
