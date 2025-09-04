@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+</head>
+<body>
+    <h1 style="color: rgb(95, 12, 26);">Simulador financeiro</h1><br><br>
+    <h4 style="color: rgb(95,12,26)">Para esse calculo foi utilizado uma média anual de perda do vinho dentro do barril por variações térmicas e de umidade</h4><br>
+    Insira a quantidade de vinho por barril (litros)<input id="ipt_quant_vinho"><br><br>
+    <button onclick="calcular()">Calcular</button>
+    <div id="div_msg"></div>
+
+</body>
+<script>
+function calcular() {
+    var ax_quant_vinho = Number (ipt_quant_vinho.value)
+    var resultado = Number ((ax_quant_vinho * 12) / 100)
+
+    div_msg.innerHTML = 'A quantidade de vinho que você inseriu foi de: ' +ipt_quant_vinho.value+ ' Litros  E a perca aproximada de conteúdo é de: ' + resultado + ' Litros'
+    
+}
+
+</script>
+</html>
