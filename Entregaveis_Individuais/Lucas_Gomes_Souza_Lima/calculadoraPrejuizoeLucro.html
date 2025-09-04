@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+
+    <style>
+
+
+    </style>
+
+<body>
+    
+    <!-- Conceitos essenciais:
+    Considere que, com a umidade baixa no processo de maturação do vinho, pode haver uma evaporação de 12% anualmente 
+    Cerca de 10% de energia elétrica economizada com o sensor (dado que medidas extremas de temperatura não serão mais tomadas)
+    O aumento de temperatura gravemente a taxa de envelhecimento do vinho, que pode essencialmente  -->
+
+    <h1> Calculadora Financeira </h1>
+
+    Insira o quantidade de litros de vinho Rose: <input type="text" id="ipt_litrosVinhoRose">
+    <br> <br>
+
+    Insira o quantidade de litros de vinho Tinto: <input type="text" id="ipt_litrosVinhoTinto">
+    <br> <br>
+
+    Insira o quantidade de litros de vinho Branco: <input type="text" id="ipt_litrosVinhoBranco">
+    <br> <br>
+
+    Total de energia gasta (em kWh) mensalmente com sistemas meteorológicos <input type="text" id="ipt_consumoEnergia">
+    <br> <br>
+
+    <button onclick="demonstrarValores()">Demonstrar valores</button>
+    <button onclick="calcularPrejuizo()">Calcular prejuizo</button>
+    <button onclick="calcularLucro()">Calcular lucro</button>
+
+
+    <div id="div_msg1">  </div>
+    <div id="div_msg2">  </div>
+
+</body>
+
+    <script>
+    vr_precoVinhoRose = 0
+    vr_precoVinhoTinto = 0
+    vr_precoVinhoBranco = 0
+
+        function demonstrarValores() {
+            vr_litrosVinhoRose = Number(ipt_litrosVinhoRose.value)
+            vr_litrosVinhoTinto = Number(ipt_litrosVinhoTinto.value)
+            vr_litrosVinhoBranco = Number(ipt_litrosVinhoBranco.value)
+            vr_total = (vr_precoVinhoRose * vr_litrosVinhoRose) + (vr_precoVinhoTinto * vr_litrosVinhoTinto) + (vr_precoVinhoBranco * vr_litrosVinhoBranco)
+            vr_consumoEnergia = Number(ipt_consumoEnergia.value)
+            vr_precoEnergia = vr_consumoEnergia * 0.85
+
+            div_msg1.innerHTML = `<br>Considerando que:<br>
+            Um litro de vinho Rose custe R$${vr_precoVinhoRose.toFixed(2)}<br>
+            Um litro de vinho Tinto custe R$${vr_precoVinhoTinto.toFixed(2)}<br>
+            Um litro de vinho Branco custe R$${vr_precoVinhoBranco.toFixed(2)}<br>
+            Os valores adquiridos na venda total seriam de R$${vr_total.toFixed(2)}.<br>
+            A energia gasta mensalmente seria de ${vr_consumoEnergia.toFixed(2)}kWh, custando cerca de R$${vr_precoEnergia.toFixed(2)}`
+        }
+
+        function calcularPrejuizo() {
+            vr_litrosVinhoRose = Number(ipt_litrosVinhoRose.value)
+            vr_litrosVinhoTinto = Number(ipt_litrosVinhoTinto.value)
+            vr_litrosVinhoBranco = Number(ipt_litrosVinhoBranco.value)
+            vr_total = (vr_precoVinhoRose * vr_litrosVinhoRose) + (vr_precoVinhoTinto * vr_litrosVinhoTinto) + (vr_precoVinhoBranco * vr_litrosVinhoBranco)
+            vr_precoEnergia = vr_consumoEnergia * 0.85
+            vr_prejuizoUmidade = vr_total * 0.12
+
+
+            div_msg2.innerHTML += `<br>Sobre o prejuizo de 12%, haverá uma perda de R$${vr_prejuizoUmidade.toFixed(2)}, totalizando R$${vr_total - vr_prejuizoUmidade.toFixed(2)}.`
+        }
+
+        function calcularLucro() {
+            vr_consumoEnergia = Number(ipt_consumoEnergia.value)
+            vr_precoEnergia = vr_consumoEnergia * 0.85
+            vr_lucroEnergia = vr_precoEnergia * 0.10
+
+            div_msg2.innerHTML += `<br>Com a utilização do sensor, é estimado um lucro de 10% (R$${vr_lucroEnergia.toFixed(2)}) na energia utilizada pela adega, totalizando R$${vr_precoEnergia - vr_lucroEnergia.toFixed(2)}.`
+        }
+
+    </script>
+
+</html>
