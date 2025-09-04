@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+    <H1>Simulado Financeiro</H1>
+    Produção total em Litros do Vinho Tinto:
+    <input id="iptProducaoTinto"> 
+    Preço do Vinho Tinto por Barril: 
+    <input id="iptPrecoMedioTinto"> <br>
+    Produção total em Litros do Vinho Rose:
+    <input id="iptProducaoRose">    
+    Preço do Vinho Rose por Barril:
+    <input id="iptPrecoMedioRose"> <br>
+    Produção total em Litros do Vinho Branco:
+    <input id="iptProducaoBranco"> 
+    Preço do Vinho Branco por Barril
+    <input id="iptPrecoMedioBranco"> <br>
+    <button onclick="CalcularVinho()">Calcular</button>   
+    <button onclick="CalcularPerda()">Calcular Perda</button>
+    <button onclick="CalcularLucro()">Calcular Ganho</button>
+    <div id="div_msg"></div>
+</body>
+<script>
+  function CalcularVinho() {
+    var ax_tinto = Number(iptProducaoTinto.value) * Number(iptPrecoMedioTinto.value)
+    var ax_rose = Number(iptProducaoRose.value) * Number(iptPrecoMedioRose.value)
+    var ax_branco = Number(iptProducaoBranco.value) * Number(iptPrecoMedioBranco.value)
+    div_msg.innerHTML = 
+    `O Valor do Vinho Tinto é: R$${ax_tinto} <br>
+    O Valor do Vinho Rose é: R$${ax_rose} <br>
+    O Valor do Vinho Branco é: R$${ax_branco} <br>`  
+  }
+  function CalcularPerda() {
+    var ax_tinto = (Number(iptProducaoTinto.value) * Number(iptPrecoMedioTinto.value))
+    var ax_tinto_result = ax_tinto * (12/100)
+    var ax_tinto1 = ax_tinto - (ax_tinto * (12/100))
+    var ax_rose = (Number(iptProducaoRose.value) * Number(iptPrecoMedioRose.value))
+    var ax_rose_result = ax_rose * (12/100)
+    var ax_rose1 = ax_rose - (ax_rose * (12/100))
+    var ax_branco = (Number(iptProducaoBranco.value) * Number(iptPrecoMedioBranco.value))
+    var ax_branco_result = ax_branco * (12/100)
+    var ax_branco1 = ax_branco - (ax_branco * (12/100))
+     div_msg.innerHTML = 
+    `Com a Perda Anual de 12%, o Valor do Vinho Tinto é: R$${ax_tinto1}, com uma perda de R$${ax_tinto_result} <br>
+    Com a Perda Anual de 12%, o Valor do Vinho Rose é: R$${ax_rose1}, com uma perda de R$${ax_rose_result} <br>
+    Com a Perda Anual de 12%, o Valor do Vinho Branco é: R$${ax_branco1}, com uma perda de R$${ax_branco_result} <br>` 
+  }
+   function CalcularLucro   () {
+    var ax_tinto = Number(iptProducaoTinto.value) * Number(iptPrecoMedioTinto.value)
+    var ax_tinto_result1 = ax_tinto * (2/100)
+    var ax_tinto1 = ax_tinto - (ax_tinto * (2/100))
+    var ax_rose = Number(iptProducaoRose.value) * Number(iptPrecoMedioRose.value) 
+    var ax_rose_result1 = ax_rose * (2/100)
+    var ax_rose1 = ax_rose - (ax_rose * (2/100))    
+    var ax_branco = Number(iptProducaoBranco.value) * Number(iptPrecoMedioBranco.value)
+    var ax_branco_result1 = ax_branco * (2/100)
+    var ax_branco1 = ax_branco - (ax_branco * (2/100))    
+    div_msg.innerHTML = 
+    `Com a Precisão de 95% - 98%, o Valor do Vinho Tinto é: R$${ax_tinto1}, com uma perda de apenas R$${ax_tinto_result1} <br>
+    Com a Precisão de 95% - 98%, o Valor do Vinho Rose é: R$${ax_rose1}, com uma perda de apenas R$${ax_rose_result1} <br>
+    Com a Precisão de 95% - 98%, o Valor do Vinho Branco é: R$${ax_branco1}, com uma perda de apenas R$${ax_branco_result1} <br>`                   
+  }
+</script>
+</html>
