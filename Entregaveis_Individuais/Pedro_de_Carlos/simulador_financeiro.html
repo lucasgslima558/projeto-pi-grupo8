@@ -29,31 +29,40 @@
     var ax_tinto = Number(iptProducaoTinto.value) * Number(iptPrecoMedioTinto.value)
     var ax_rose = Number(iptProducaoRose.value) * Number(iptPrecoMedioRose.value)
     var ax_branco = Number(iptProducaoBranco.value) * Number(iptPrecoMedioBranco.value)
-    div_msg.innerHTML = `O Valor do Vinho Tinto é: R$${ax_tinto} <br>
-                         O Valor do Vinho Rose é: R$${ax_rose} <br>
-                         O Valor do Vinho Branco é: R$${ax_branco} <br>`  
+    div_msg.innerHTML = 
+    `O Valor do Vinho Tinto é: R$${ax_tinto} <br>
+    O Valor do Vinho Rose é: R$${ax_rose} <br>
+    O Valor do Vinho Branco é: R$${ax_branco} <br>`  
   }
   function CalcularPerda() {
     var ax_tinto = (Number(iptProducaoTinto.value) * Number(iptPrecoMedioTinto.value))
+    var ax_tinto_result = ax_tinto * (12/100)
     var ax_tinto1 = ax_tinto - (ax_tinto * (12/100))
     var ax_rose = (Number(iptProducaoRose.value) * Number(iptPrecoMedioRose.value))
+    var ax_rose_result = ax_rose * (12/100)
     var ax_rose1 = ax_rose - (ax_rose * (12/100))
     var ax_branco = (Number(iptProducaoBranco.value) * Number(iptPrecoMedioBranco.value))
+    var ax_branco_result = ax_branco * (12/100)
     var ax_branco1 = ax_branco - (ax_branco * (12/100))
-     div_msg.innerHTML = `Com a Perda Anual de 12%, o Valor do Vinho Tinto é: R$${ax_tinto1} <br>
-                         Com a Perda Anual de 12%, o Valor do Vinho Rose é: R$${ax_rose1} <br>
-                         Com a Perda Anual de 12%, o Valor do Vinho Branco é: R$${ax_branco1} <br>` 
+     div_msg.innerHTML = 
+    `Com a Perda Anual de 12%, o Valor do Vinho Tinto é: R$${ax_tinto1}, com uma perda de R$${ax_tinto_result} <br>
+    Com a Perda Anual de 12%, o Valor do Vinho Rose é: R$${ax_rose1}, com uma perda de R$${ax_rose_result} <br>
+    Com a Perda Anual de 12%, o Valor do Vinho Branco é: R$${ax_branco1}, com uma perda de R$${ax_branco_result} <br>` 
   }
    function CalcularLucro   () {
     var ax_tinto = Number(iptProducaoTinto.value) * Number(iptPrecoMedioTinto.value)
+    var ax_tinto_result1 = ax_tinto * (2/100)
     var ax_tinto1 = ax_tinto - (ax_tinto * (2/100))
     var ax_rose = Number(iptProducaoRose.value) * Number(iptPrecoMedioRose.value) 
+    var ax_rose_result1 = ax_rose * (2/100)
     var ax_rose1 = ax_rose - (ax_rose * (2/100))    
     var ax_branco = Number(iptProducaoBranco.value) * Number(iptPrecoMedioBranco.value)
+    var ax_branco_result1 = ax_branco * (2/100)
     var ax_branco1 = ax_branco - (ax_branco * (2/100))    
-    div_msg.innerHTML = `Com a Precisão de 95% - 98%, o Valor do Vinho Tinto é: R$${ax_tinto1} <br>
-                         Com a Precisão de 95% - 98%, o Valor do Vinho Rose é: R$${ax_rose1} <br>
-                         Com a Precisão de 95% - 98%, o Valor do Vinho Branco é: R$${ax_branco1} <br>` 
+    div_msg.innerHTML = 
+    `Com a Precisão de 95% - 98%, o Valor do Vinho Tinto é: R$${ax_tinto1}, com uma perda de apenas R$${ax_tinto_result1} <br>
+    Com a Precisão de 95% - 98%, o Valor do Vinho Rose é: R$${ax_rose1}, com uma perda de apenas R$${ax_rose_result1} <br>
+    Com a Precisão de 95% - 98%, o Valor do Vinho Branco é: R$${ax_branco1}, com uma perda de apenas R$${ax_branco_result1} <br>`                   
   }
 </script>
 </html>
