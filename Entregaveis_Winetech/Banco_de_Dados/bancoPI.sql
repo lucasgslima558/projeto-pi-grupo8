@@ -1,3 +1,13 @@
+/*
+Integrantes:
+
+Lucas Gomes Souza Lima
+Pedro 
+Gabriel Rodrigues de Lima
+Vinícius Francelino
+Davi Jerônimo
+*/
+
 -- Criando banco de dados
 
 CREATE DATABASE projetoPI;
@@ -8,13 +18,13 @@ USE projetoPI;
 
 CREATE TABLE empresa (
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
-	nome_Empresa VARCHAR(50) NOT NULL,
+	nome VARCHAR(50) NOT NULL,
     ddd VARCHAR(10) NOT NULL,
-    telefone_Empresa VARCHAR(30) NOT NULL,
-	email_Empresa VARCHAR(50) NOT NULL,
-	site_Empresa VARCHAR (100) NOT NULL,
-	cnpj_Empresa CHAR (20) NOT NULL,
-	cep_Empresa CHAR (10) NOT NULL,
+    telefone VARCHAR(30) NOT NULL,
+	email VARCHAR(50) NOT NULL, -- Analisar esse campo
+	site VARCHAR (100) NOT NULL,
+	cnpj CHAR (20) NOT NULL,
+	cep CHAR (10) NOT NULL,
 	pais VARCHAR(100) NOT NULL,
     uf CHAR(2) NOT NULL,
     cidade VARCHAR(100) NOT NULL,
@@ -22,30 +32,26 @@ CREATE TABLE empresa (
     bairro VARCHAR(100) NOT NULL,
     numero VARCHAR(30) NOT NULL,
     complemento VARCHAR(190),
-    observacoes VARCHAR(300),
-	dt_CadastroEmpresa DATETIME DEFAULT CURRENT_TIMESTAMP 
+	dt_Cadastro DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
 -- Inserindo dados na tabela de Cadastro de Empresa
 
-INSERT INTO empresa (nome_Empresa, ddd, telefone_Empresa, email_Empresa, site_Empresa, cnpj_Empresa, cep_Empresa, pais, uf, cidade, logradouro, bairro, numero, complemento, observacoes) VALUES
-	('Vinícola Ouro Verde', '55', '11934567890', 'clienteempresa01@gmail.com', 'www.vinicolaouroverde.com.br', '32888619000170', '15990882', 'Brasil', 'RS', 'Bento Gonçalves', 'Rua das Uvas', 'Centro', '1200', 'Bloco A', 'Solicita relatórios mensais'),
-	('Adega São Pedro', '55', '11234564532', 'suporte@adegaspedro.com', 'www.adegasaopedro.com.br', '58234123000170', '38700230', 'Brasil', 'SP', 'São Roque', 'Avenida Vinhedo', 'Jardim Vinhedos', '455', 'Sala 2', 'Interessada em expansão do sistema');
+INSERT INTO empresa (nome, ddd, telefone, email, site, cnpj, cep, pais, uf, cidade, logradouro, bairro, numero, complemento) VALUES
+	('Vinícola Ouro Verde', '55', '11934567890', 'clienteempresa01@gmail.com', 'www.vinicolaouroverde.com.br', '32888619000170', '15990882', 'Brasil', 'RS', 'Bento Gonçalves', 'Rua das Uvas', 'Centro', '1200', 'Bloco A'), 
+	('Adega São Pedro', '55', '11234564532', 'suporte@adegaspedro.com', 'www.adegasaopedro.com.br', '58234123000170', '38700230', 'Brasil', 'SP', 'São Roque', 'Avenida Vinhedo', 'Jardim Vinhedos', '455', 'Sala 2');
 
 -- Selecionando e exibindo dados na tabela de Cadastro de Empresa
 
-SELECT * FROM empresa;
-
 SELECT idEmpresa,
-	nome_Empresa AS 'Nome da Empresa',
-	cnpj_Empresa AS 'CNPJ', 
-	CONCAT('+', ddd, ' ', telefone_Empresa) AS 'Telefone empresarial',
-	email_Empresa AS 'E-mail da Empresa',
-	site_Empresa AS 'Site da Empresa',
+	nome AS 'Nome',
+	cnpj AS 'CNPJ', 
+	CONCAT('+', ddd, ' ', telefone) AS 'Telefone',
+	email AS 'E-mail',
+	site AS 'Site',
 	CONCAT(logradouro, ', ', numero, ', ', complemento, ', ', bairro, ', ', cidade, ', ', uf, ', ', pais) AS 'Endereço',
-	cep_Empresa AS 'CEP', 
-	observacoes AS 'Informações extras',
-	dt_CadastroEmpresa AS 'Data e Hora do Cadastro'
+	cep AS 'CEP', 
+	dt_Cadastro AS 'Data e Hora do Cadastro'
 	FROM empresa;
 
 
@@ -53,34 +59,34 @@ SELECT idEmpresa,
 
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome_Cliente VARCHAR(100) NOT NULL,
-    sobrenome_Cliente VARCHAR(100) NOT NULL,
-    senha_Acesso VARCHAR(30) NOT NULL,
-    cpf_Cliente CHAR(12) NOT NULL,
-    email_Cliente VARCHAR(100),
-    dt_CadastroUsuario DATETIME DEFAULT CURRENT_TIMESTAMP
+    nome VARCHAR(100) NOT NULL,
+    sobrenome VARCHAR(100) NOT NULL,
+    senha VARCHAR(30) NOT NULL,
+    cpf CHAR(12) NOT NULL,
+    email VARCHAR(100),
+    dt_Cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Inserindo dados na tabela de Cadastro do Usuário
 
-INSERT INTO usuario (nome_Cliente, sobrenome_Cliente, senha_Acesso, cpf_Cliente, email_Cliente) VALUES
+INSERT INTO usuario (nome, sobrenome, senha, cpf, email) VALUES
 	('João', 'Silva', '********@', '45213456453', 'joaosilva330@email.com'),
 	('Maria', 'Souza', '******@', '31981795057', 'mariasouza1023@email.com');
 
 -- Selecionando e exibindo dados na tabela de Cadastro do Usuário
 
-SELECT CONCAT(nome_Cliente , ' ', sobrenome_Cliente) AS 'Nome do Cliente',
-		senha_Acesso AS 'Senha de Acesso',
-        cpf_Cliente AS 'CPF',
-        email_Cliente AS 'E-mail'
+SELECT CONCAT(nome , ' ', sobrenome) AS 'Nome',
+		senha AS 'Senha de Acesso',
+        cpf AS 'CPF',
+        email AS 'E-mail'
         FROM usuario;
 
 -- Criando tabela de Arduino	
 
 CREATE TABLE dadosArduino(
 	idArduino INT PRIMARY KEY AUTO_INCREMENT,
-	temp_Atual VARCHAR(30),
-	umid_Atual VARCHAR(30),
+	temp_Atual DECIMAL(6,2),
+	umid_Atual DECIMAL(6,2),
 	dtHrMonitoramento DATETIME DEFAULT CURRENT_TIMESTAMP
 );
   
@@ -106,11 +112,11 @@ INSERT INTO dadosArduino (temp_Atual, umid_Atual) VALUES
 
 CREATE TABLE tipoVinho(
 	idTipo INT PRIMARY KEY AUTO_INCREMENT,
-	tipo VARCHAR(50),
-    temperatura_Min DECIMAL(5,2),
-    temperatura_Max DECIMAL(5,2),
-    umidade_Min DECIMAL(5,2),
-    umidade_Max DECIMAL(5,2),
+	tipo VARCHAR(50) NOT NULL,
+    temperatura_Min DECIMAL(6,2) NOT NULL,
+    temperatura_Max DECIMAL(6,2) NOT NULL,
+    umidade_Min DECIMAL(6,2) NOT NULL,
+    umidade_Max DECIMAL(6,2) NOT NULL,
     dt_Safra DATE,
     CHECK (tipo IN('Rose', 'Branco', 'Tinto'))
 );

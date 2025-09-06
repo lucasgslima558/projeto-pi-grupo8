@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Winetech Simulator</title>
 </head>
-
-
 <body style= background-color:brown;color:white>
+    
     <header> 
         <img src="C:\Users\Jeronimo\Downloads\winetechLogo.png" width="130px" height="130px">
         <h2><i>Winelator-Calculador financeiro</i></h2>
@@ -20,69 +19,48 @@
     <b>Insira o valor pago por barril:</b><br>
     <input id="ipt_valor"> <br> 
     <button onclick="investimento()">Calcular investimento feito</button><br><br>
-    <button onclick="perda()">Calcular sem monitoramento: Perda de barris</button> <br><br> 
-    <button onclick="perdars()">Calcular sem monitoramento: Perda de dinheiro </button> <br><br>
-    <button onclick="ganho()">Calcular com monitoramento: Ganho de barris </button>  <br><br>
-    <button onclick="ganhors()">Calcular com monitoramento: Ganho de dinheiro </button><br><br>
+    <button onclick="perdaeganhobarris()">Calcular: Perda de barris</button> <br><br> 
+    <button onclick="perdaeganhors()">Calcular: Perda de dinheiro </button> <br><br>
+    <div id="div_msg"></div>
     
-        <div id="div_msg"></div>
-            
-            
-    </body>
+</body>
 
-    <script>
-function investimento() {
+<script>
+    function investimento() {
+
     var barris= Number(ipt_barris.value);
     var valorb= Number(ipt_valor.value);
     var capital= barris*valorb;
 
     div_msg.innerHTML= 'O valor investido foi de R$' + capital.toFixed(2)
-}
+    }
 
-function perda() {
-    var barris= Number(ipt_barris.value);
-    var porc1= barris*Number(0.88);
-    var result1= barris-porc1;
+    function perdaeganhobarris() {
+        var barris= Number(ipt_barris.value);
+        var porc1= barris*Number(0.88);
+        var porc4= barris*Number(0.98);
+        var result1= barris-porc1;
+        var result2= barris-porc4;
 
-    div_msg.innerHTML= 'Sem monitoramento de temperatura e umidade anual incluido nos nossos serviços, estima-se a perda de 12% dos barris de vinho ' + ipt_vinho.value + ', o que resulta aproximadamente na perda de '+ result1.toFixed(2) + ' barris.'
+
+        div_msg.innerHTML= 'Sem monitoramento de temperatura e umidade anual incluido nos nossos serviços, estima-se a perda de 12% dos barris de vinho ' + ipt_vinho.value + ', o que resulta aproximadamente na perda de '+ result1.toFixed(2) + ' barris.'
+        div_msg.innerHTML+= '<br>Com os nossos serviços de monitoramento de temperatura e umidade anual, tem se a diminuição da porcentagem da perda em 10%  dos  barris de vinho ' + ipt_vinho.value + ', o que resulta em '+ result2.toFixed(2) + ' perdas de  barris.'
     
-}
-function perdars() {
-    var barris= Number(ipt_barris.value);
-    var valorb= Number(ipt_valor.value);
-    var capital= barris*valorb;
-    var porcdin= capital*Number(0.88);
-    var valordin1 = capital-porcdin;
-    var result2= valordin1
-
-    div_msg.innerHTML= 'Sem monitoramento de temperatura e umidade anual incluido nos nossos serviços, estima-se a perda de 12% dos barris de vinho ' + ipt_vinho.value + ', o que resulta aproximadamente na perda de R$'+ result2.toFixed(2)
+    }
+    function perdaeganhors() {
+        var barris= Number(ipt_barris.value);
+        var valorb= Number(ipt_valor.value);
+        var capital= barris*valorb;
+        var porcperda= capital*Number(0.88);
+        var porcganho= capital*Number(0.98);
+        var valordin1 = capital-porcperda;
+        var valordin2 = capital-porcganho;
     
-   
-}
-function ganhors() {
-    var barris= Number(ipt_barris.value);
-    var valorb= Number(ipt_valor.value);
-    var capital= barris*valorb;
-    var porcent= capital*Number(0.98);
 
-    div_msg.innerHTML= 'Com os nossos serviços de monitoramento de temperatura e umidade anual, tem-se a diminuição da porcentagem de perda em 10%, assim  resultando no valor em R$' + porcent.toFixed(2)
-
-}
-
-function ganho() {
-    var barris= Number(ipt_barris.value);
-    var porc1= barris*Number(0.98);
-    var result1= barris-porc1;
-
-    div_msg.innerHTML= 'Com monitoramento de temperatura e umidade anual, tem se a diminuição da porcentagem da perda em 10%  dos  barris de vinho ' + ipt_vinho.value + ', o que resulta em '+ result1.toFixed(2) + ' perdas de  barris.'
-
-
-
-
-    
-}
-
-    </script>
+        div_msg.innerHTML= 'Sem monitoramento de temperatura e umidade anual incluido nos nossos serviços, estima-se a perda de 12% dos barris de vinho ' + ipt_vinho.value + ', o que resulta aproximadamente na perda de R$'+ valordin1.toFixed(2)
+        div_msg.innerHTML+= '<br>Com os nossos serviços de monitoramento de temperatura e umidade anual, tem-se a diminuição da porcentagem de perda em 10%, assim  resultando no valor em R$' + porcganho.toFixed(2)
+    }
+</script>
 
 
 </html>

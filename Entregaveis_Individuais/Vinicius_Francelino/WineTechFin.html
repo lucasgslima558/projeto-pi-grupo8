@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WineTech - Simulador Fincanceiro</title>
+
+</head>
+<body>
+    <header>
+        <h1>WineTech - Simulador Fincanceiro</h1>
+    </header>
+
+    <main>
+        <p>Bem Vindo(a)! Aqui você pode simular os valores e resultados com as soluções WineTech</p>
+        <p><b>OBS: Campos com '*' são obrigatorios</b></p>
+        
+        <label><b><i>Informe o Número de barris na cave: *</i></b></label><br> 
+        <input type="number" id="iptQtdBarril" placeholder="Ex. 50"><br><br>
+
+        <label><b><i>Informe Preço medio de um barril: *</i></b></label><br>
+        <input type="number" id="iptPrecoBarril" placeholder="Ex. 30000"><br><br>
+        
+        <label><b><i>Informe as Perdas anuais (%): *</i></b></label><br>
+        <input type="number" id="iptPerda" placeholder="Ex. 50"><br><br>
+        
+        <button onclick="calculo()" style="margin-left: 50px;">Calcular</button>
+        <div id="divMsg"></div>
+    </main>
+</body>
+<script>
+    function calculo(){
+        var qtdBarril = iptQtdBarril.value; // Quantidade de Barris de Vinho na Cave;
+        var precoBarril = iptPrecoBarril.value; // Preco estimado do barril;
+        var perdaAnual = iptPerda.value; // Porcentagem de perda do cliente;
+        var custo = 1000;
+
+        // Calculos realizados sobre os valores e perdas do cliente; 
+        var valorTotal = qtdBarril * precoBarril;
+        var valorPerda = (perdaAnual * valorTotal) / 100;
+
+        // Calculos realizados sobre os valores e perdas do cliente com a WineTech Solutions;
+        var percentwine = perdaAnual / 2;
+        var perdaWine = (percentwine * valorTotal) / 100;
+
+        // Economia do cliente, Lucro e ROI;
+        var econWine = valorPerda - perdaWine; 
+        var lucroLiquido = econWine - custo;
+        var roi = (lucroLiquido / custo) * 100;
+
+        // If para validação de campos em branco
+        if (qtdBarril == "" || precoBarril == "" || perdaAnual == ""){
+            alert (`Por favor, preencha os campos corretamente!`);
+            return;
+        }
+
+        // Informações exibidas ao cliente sobre seus valores e gastos;
+        divMsg.innerHTML = `<h3>Resultados sem a Winetech Solutions</h3>💰 Valor total em Estoque: R$: <span style="color: green;"><b>${valorTotal.toFixed(2)}</b></span><br>
+        📉 Valor de perdas Anuais: R$:  <span style="color: red;"><b>${valorPerda.toFixed(2)}</b></span>`
+    
+
+        if (perdaWine <= 0){
+            divMsg.innerHTML += `<h3>Resultados com a Winetech Solutions</h3> 
+            Com a WineTech, estimamos que suas perdas, diminuam em 50% devido a tecnologia de monitoramento.<br>
+            📊 Perdas anuais com a WinTech Solutions R$: <span style="color: red;"><b>${perdaWine.toFixed(2)}</b></span><br>
+            ✅ Prejuizo Potencial de R$:  <span style="color: red;"><b>${econWine.toFixed(2)}</b></span> ao ano<br>
+            🔄 ROI: R$: <span style="color: red;"><b>${roi.toFixed(1)}%</b></span><br>`
+        } else {
+            if (econWine <= 0){
+                divMsg.innerHTML += `<h3>Resultados com a Winetech Solutions</h3> 
+                Com a WineTech, estimamos que suas perdas, diminuam em 50% devido a tecnologia de monitoramento.<br>
+                📊 Perdas anuais com a WinTech Solutions R$: <span style="color: orange;"><b>${perdaWine.toFixed(2)}</b></span><br>
+                ✅ Economia Potencial de R$:  <span style="color: red;"><b>${econWine.toFixed(2)}</b></span> ao ano<br>
+                🔄 ROI: R$: <span style="color: red;"><b>${roi.toFixed(1)}%</b></span><br>`
+            } else {
+                divMsg.innerHTML += `<h3>Resultados com a Winetech Solutions</h3> 
+                Com a WineTech, estimamos que suas perdas, diminuam em 50% devido a tecnologia de monitoramento.<br>
+                📊 Perdas anuais com a WinTech Solutions R$: <span style="color: orange;"><b>${perdaWine.toFixed(2)}</b></span><br>
+                ✅ Economia Potencial de R$:  <span style="color: green;"><b>${econWine.toFixed(2)}</b></span> ao ano<br>
+                🔄 ROI: R$: <span style="color: green;"><b>${roi.toFixed(1)}%</b></span><br>`
+            }
+        }
+    }
+</script>
+</html> 
+<!-- 
+=============================
+ TABELA DE TESTES – WineTech
+=============================
+
+Objetivo: Validar as estruturas condicionais do sistema de simulação.
+Cada linha representa um cenário com resultados esperados, incluindo ROI e condições de decisão.
+
+-------------------------------------------------------------------------------------------------------
+| # | Qtd. Barris | Preço Barril (R$) | % Perda | Valor Total (R$) | Perda (R$) | Economia (R$) | ROI (R$) | ROI (%) | Condição Esperada                             |
+|---|-------------|--------------------|---------|-------------------|-------------|----------------|-----------|----------|-----------------------------------------------|
+| 1 |     250     |       1000         |   15    |   250.000,00      |  37.500,00  |   18.750,00     | 17.750,04 | 1775,1%  | if principal – Resultado positivo             |
+| 2 |     10      |        100         |   10    |     1.000,00      |    100,00   |     50,00       | -949,96   | -195,0%  | else if – Economia e ROI negativos            |
+| 3 |     200     |       1000         |    0    |   200.000,00      |      0,00   |      0,00       | -999,96   | -100,0%  | else final – Todos valores negativos          |
+-------------------------------------------------------------------------------------------------------
+
+Fórmulas usadas:
+- Valor Total      = Qtd. Barris × Preço por Barril
+- Valor Perda      = (Valor Total × % Perda) / 100
+- Economia         = Valor Perda / 2
+- ROI (R$)         = Economia - Custo do Sistema (fixo: R$ 999,96)
+- ROI (%)          = (ROI / Custo do Sistema) × 100 
+-->
